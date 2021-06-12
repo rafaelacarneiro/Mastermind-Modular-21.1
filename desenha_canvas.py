@@ -60,7 +60,7 @@ def mostra_senha(cnv,pedras,nivel,senha,xi=20,xf=50,teste=False):      # define 
 
 def esqueleto(cnv,xi,yi,xf,yf,pedras,linhas):           # monta os retangulos para colocar as chaves e os resultados
     altura=yf-yi
-    r = cnv.create_rectangle(5,yi,340,yf,outline='black')   # cria o primeiro retangulo
+    r = cnv.create_rectangle(5,yi,340,yf,outline='black',state='disabled')   # cria o primeiro retangulo
     for cont in range(pedras):                              # preenche o primeiro retangulo com a chave escondida
         o = cnv.create_oval(xi,20,xf,50,outline='grey',fill='grey')
         xi = xf+10
@@ -69,8 +69,8 @@ def esqueleto(cnv,xi,yi,xf,yf,pedras,linhas):           # monta os retangulos pa
     yf+=altura
     cont=0
     while cont < linhas:                                    #cria os retangulos restantes
-        r = cnv.create_rectangle(5,yi,270,yf,outline='black')
-        q = cnv.create_rectangle(270,yi,340,yf,outline='black') 
+        r = cnv.create_rectangle(5,yi,270,yf,outline='black',state='disabled')
+        q = cnv.create_rectangle(270,yi,340,yf,outline='black',state='disabled') 
         yi=yf
         yf+=altura
         cont+=1
@@ -147,17 +147,19 @@ def monta_tabuleiro(nivel, lim, pedras,cnv,tab):    # monta todo o tabuleiro, ut
 
 def attemptResult(cnv,pretas,brancas,linha,final_tab):
     xi=280
-    yi=final_tab-5
-    yi-=linha*55
+    yi=final_tab-35
+    yi-=linha*50
     for i in range(pretas):
-        if i>=4:
+        if i==4:
             yi+=15
-        o = cnv.create_oval(xi,yi,xi+10,yi+10,outline='black',fill='black')
+            xi=280
+        o = cnv.create_oval(xi,yi,xi+10,yi+10,outline='black',fill='black',state='disabled')
         xi+=15
-    for i in range(brancas):
-        if i>=4:
+    for j in range(brancas):
+        if j==4 or j+i==3:
             yi+=15
-        o = cnv.create_oval(xi,yi,xi+10,yi+10,outline='white',fill='white')
+            xi=280
+        o = cnv.create_oval(xi,yi,xi+10,yi+10,fill='white',state='disabled')
         xi+=15
     cnv.pack()
     return
