@@ -21,7 +21,7 @@ def abre_jogo(niv,lim,ped):
     tab= Tk()
     tab.geometry('345x800')
     menu(tab)
-    cnv = Canvas(tab,width=345,height=700)
+    cnv = Canvas(tab,width=345,height=800,bg='lightblue')
     cnv.bind('<ButtonRelease-1>',funcao)
     checar = draw.monta_tabuleiro(niv,lim,ped,cnv,tab)
     cnv.pack()
@@ -103,7 +103,9 @@ def funcao(evento):
 
         if 0 not in tentativa:          #se o vetor com as tentativas está preenchido de cores, habilita o botao para checar a chave
             changeState(checar,'normal')
-            checar.configure(command=lambda:[rules.compara(tentativa,progresso),changeState(checar,'disabled'),monta_tentativa(),draw.attemptResult(evento.widget,progresso[-1][1][0],progresso[-1][1][1],attempts,final_tab),resultado(progresso,evento.widget)])
+            checar.configure(command=lambda:[rules.compara(tentativa,progresso),changeState(checar,'disabled'),monta_tentativa(),
+                                             draw.attemptResult(evento.widget,progresso[-1][1][0],progresso[-1][1][1],attempts,final_tab),
+                                             resultado(progresso,evento.widget)])
             
             
 
